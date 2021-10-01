@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}
+  Последователи
+{% endblock %} 
+{% block content %}
+{% load thumbnail %}
+  <div class="container py-5">
+  {% include 'home/includes/switcher.html' %}
+    {% for post in page_obj %}
+      {% include 'home/includes/post_list.html' %}
+      {% if post.group.slug %}
+        <a href="{% url 'home:group_list' post.group.slug %}">все записи группы</a>
+      {% endif %}
+      {% if not forloop.last %}<hr>{% endif %}
+    {% endfor %} 
+ {% include 'home/includes/paginator.html' %}
+ </div> 
+{% endblock %}
+ 

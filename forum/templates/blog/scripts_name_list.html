@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Список Скриптов</h1>
+    <li>{{ some_data }}</li>
+        
+
+    {% if myscripts_list %}
+    <ul>
+
+      {% for myscript in myscripts_list %}
+      <li>
+        <a href="{{ myscript.get_absolute_url }}">{{ myscript.title }}</a>
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>Скриптов  нет.</p>
+    {% endif %} 
+{% endblock %}

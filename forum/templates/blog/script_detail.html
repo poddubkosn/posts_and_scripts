@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}
+  Скрипт {{ myscript.title }}
+{% endblock %} 
+{% block content %}
+{% load thumbnail %}
+  <div class="container py-5">
+      <div class="row">
+        <aside class="col-12 col-md-3">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              Дата публикации: {{ post.pub_date|date:"d E Y" }} 
+            </li>
+            <h1>{{ myscript.title }}</h1>
+            {% if owner_of_post %}
+              <a href="{% url 'blog:script_edit' myscript.slug %}">редактирование поста</a>
+            {% endif %}
+             </li>
+          </ul>
+        </aside>
+        <article class="col-12 col-md-9">
+          {% thumbnail myscript.image "960x669" crop="center" upscale=True as im %}
+          <img class="card-img my-2" src="{{ im.url }}">
+          {% endthumbnail %}
+          <p>{{ myscript.text | linebreaksbr}}</p>
+{% load user_filters %}
+{% if user.is_authenticated %}
+  <div class="card my-4">
+    <h5 class="card-header">Добавить комментарий:</h5>
+    <div class="card-body">
+      <form method="post" action="{% url 'blog:add_comment' myscript.slug %}">
+        {% csrf_token %}      
+        <div class="form-group mb-2">
+          {{ form.text|addclass:"form-control"}}
+        </div>
+        <button type="submit" class="btn btn-primary">Отправить</button>
+      </form>
+    </div>
+  </div>
+{% endif %}
+{% for comment in comments %}
+  <div class="media mb-4">
+    <div class="media-body">
+      <h5 class="mt-0">
+        
+      </h5>
+        <p>
+         {{ comment.text }}
+        </p>
+      </div>
+    </div>
+{% endfor %}
+        </article>
+      </div> 
+{% endblock %}
+    

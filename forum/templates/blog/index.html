@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+  Последние обновления на сайте
+{% endblock %} 
+{% block content %}
+{% load thumbnail %}
+{% load cache %}
+{% cache 20 index_page page_obj %}
+  <div class="container py-5">
+  {% include 'posts/includes/switcher.html' %}
+    {% for post in page_obj %}
+      {% include 'posts/includes/post_list.html' %}
+      {% if post.group.slug %}
+        <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
+      {% endif %}
+      {% if not forloop.last %}<hr>{% endif %}
+    {% endfor %} 
+ {% include 'posts/includes/paginator.html' %}
+  </div> 
+{% endcache %}
+{% endblock %}
+ 
