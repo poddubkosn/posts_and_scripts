@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'users.apps.UsersConfig',
     'blog.apps.BlogConfig',
+    'about.apps.AboutConfig',
     'django_extensions',
     'sorl.thumbnail',
 ]
