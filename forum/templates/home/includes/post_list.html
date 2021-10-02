@@ -1,15 +1,23 @@
 
 {% load thumbnail %}
 <article>
+
   <ul>
     <li>
-      Автор: {{ post.author.get_full_name }} 
-        <a href="{% url 'home:profile' post.author.username %}">все посты пользователя</a>
+      Автор: {{ post.author.get_full_name }}  
     </li>
     <li>
         Дата публикации: {{ post.pub_date|date:"d E Y" }}
+        
+       
+    </li>
+    <li>
+        <a href="{% url 'home:profile' post.author.username %}">Все посты пользователя</a>
     </li>
     </ul>
+    
+    
+    
     <aside class="col-12 col-md-9 col-md-9">
     {% thumbnail post.image "900x614" crop="center" upscale=True as im %}
           <img class="card-img my-2" src="{{ im.url }}">

@@ -9,8 +9,12 @@
       
       {% with request.resolver_match.view_name as view_name %}
       <ul class="nav nav-pills">
+      
         <li class="nav-item">
           <a class="nav-link {% if view_name  == 'blog:list_of_scripts' %}active{% endif %}" href="{% url 'blog:list_of_scripts' %}">Блог</a>
+        </li>
+        <li class="nav-item"> 
+          <a class="nav-link {% if view_name  == 'about:author' %}active{% endif %}" href="{% url 'about:author' %}">Об авторе</a>
         </li>
         {% if user.is_authenticated %}
         <li class="nav-item"> 
