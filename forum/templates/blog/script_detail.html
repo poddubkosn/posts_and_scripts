@@ -19,7 +19,7 @@
           </ul>
         </aside>
         <article class="col-12 col-md-9">
-          {% thumbnail myscript.image "960x669" crop="center" upscale=True as im %}
+          {% thumbnail myscript.image "600x339" crop="center" upscale=True as im %}
           <img class="card-img my-2" src="{{ im.url }}">
           {% endthumbnail %}
           <p>{{ myscript.text | linebreaksbr}}</p>

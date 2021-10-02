@@ -10,9 +10,11 @@
         Дата публикации: {{ post.pub_date|date:"d E Y" }}
     </li>
     </ul>
-    {% thumbnail post.image "960x669" crop="center" upscale=True as im %}
+    <aside class="col-12 col-md-9 col-md-9">
+    {% thumbnail post.image "900x614" crop="center" upscale=True as im %}
           <img class="card-img my-2" src="{{ im.url }}">
           {% endthumbnail %}
+         </aside>
     <p>{{ post.text | linebreaksbr }}</p>
   <a href="{% url 'home:post_detail' post.pk %}">подробная информация </a>
 </article>
