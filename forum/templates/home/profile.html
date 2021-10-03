@@ -37,8 +37,7 @@
           <img class="card-img my-2" src="{{ im.url }}">
           {% endthumbnail %}
             <p>{{ post.text | linebreaksbr }}</p>
-            <a href="{% url 'home:post_detail' post.pk %}">подробная информация </a><br>
-            <a href="{% url 'home:post_detail' post.pk %}">Комментарии к посту: {{ post.comments.count}} </a>
+            <a href="{% url 'home:post_detail' post.pk %}">Прокомментровать: {{ post.comments.count}} </a>
           </article>
           {% if post.group.slug %}       
             <a href="{% url 'home:group_list' post.group.slug %}">все записи группы</a> 
