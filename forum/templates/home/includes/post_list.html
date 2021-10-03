@@ -3,18 +3,20 @@
 <article>
 
   <ul>
-    <li>
-      Автор: {{ post.author.get_full_name }}  
-    </li>
-    <li>
-        Дата публикации: {{ post.pub_date|date:"d E Y" }}
-        
+    <div class="d-flex justify-content-between">
        
-    </li>
+      <li>
+        Автор: {{ post.author.get_full_name }}
+      </li>
+      <li>
+         Дата публикации: {{ post.pub_date|date:"d E Y" }}
+      </li>
+    </div>
+       
     <li>
         <a href="{% url 'home:profile' post.author.username %}">Все посты пользователя</a>
     </li>
-    </ul>
+ </ul>
     
     
     
