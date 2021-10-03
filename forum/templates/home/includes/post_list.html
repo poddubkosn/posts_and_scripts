@@ -24,6 +24,7 @@
           {% endthumbnail %}
          </aside>
     <p>{{ post.text | linebreaksbr }}</p>
-  <a href="{% url 'home:post_detail' post.pk %}">подробная информация </a>
+  <a href="{% url 'home:post_detail' post.pk %}">подробная информация </a><br>
+  <a href="{% url 'home:post_detail' post.pk %}">Количество комментариев: {{ post.comments.count}} </a>
 </article>
  
