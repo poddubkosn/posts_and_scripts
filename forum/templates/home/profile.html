@@ -4,7 +4,8 @@
 {% endblock %} 
 {% block content %}
 {% load thumbnail %}
-<div class="mb-5">
+<article>
+<div class="card my-4 shadow">
   <h1>Все посты пользователя {{ author.get_full_name }}</h1>
   <h3>Всего постов: {{ posts_count }}</h3>
   {% if following %}
@@ -29,7 +30,7 @@
         </div>
         <div class="card my-4 shadow"> 
         {% for post in page_obj %}
-          <article>
+          
           <div class="card-header text-success-50 bg-white    ">
             <span>
                   Дата публикации: {{ post.pub_date|date:"d E Y" }}
