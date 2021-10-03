@@ -24,14 +24,11 @@
       </a>
    {% endif %}
 </div>
-   <div class="container py-5">        
-        <h1>Все посты пользователя {{author.get_full_name}} </h1>
-        <h3>Всего постов: {{posts_count}} </h3>  
-        </div>
-        <div class="card my-4 shadow">
+   
+        
         {% for post in page_obj %}
-          
-          <div class="card-header text-success-50 bg-white    ">
+<div class="card my-4 shadow">
+     <div class="card-header text-success-50 bg-white    ">
             <span>
                   Дата публикации: {{ post.pub_date|date:"d E Y" }}
             </span>
@@ -41,18 +38,20 @@
           <img class="card-img my-2" src="{{ im.url }}">
           {% endthumbnail %}
           </aside>
-          </div>
-          <div class="card-header text-success-50 bg-white    ">
+      </div>
+   <div class="card-header text-success-50 bg-white    ">
             <p>{{ post.text | linebreaksbr }}</p>
             <a href="{% url 'home:post_detail' post.pk %}">Прокомментровать: {{ post.comments.count}} </a>
           <br>
           {% if post.group.slug %}       
             <a href="{% url 'home:group_list' post.group.slug %}">все записи группы</a> 
           {% endif %} 
-          </div>      
-        
+    </div>   
+</div>   
         {% endfor %}
+        
         {% include 'home/includes/paginator.html' %}
-    </div>
+          
+    
     </article>
  {% endblock %}
