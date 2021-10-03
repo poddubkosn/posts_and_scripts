@@ -1,32 +1,38 @@
 
 {% load thumbnail %}
 <article>
-
-  <ul>
-    <div class="d-flex justify-content-between">
+<div class="card my-4 shadow">
+  <div class="card-header text-success-50 bg-white    ">
+  
+      <div class="d-flex justify-content-between">
        
-      <li>
+      
         Автор: {{ post.author.get_full_name }}
-      </li>
-      <li>
+     
+        <span>
          Дата публикации: {{ post.pub_date|date:"d E Y" }}
-      </li>
-    </div>
-       
-    <li>
-        <a href="{% url 'home:profile' post.author.username %}">Все посты пользователя</a>
-    </li>
- </ul>
+        </span>
+      </div>
+     
+    
+        <a href="{% url 'home:profile' post.author.username %}"class="text-dark">Все посты пользователя</a>
+  </div> 
+
     
     
     
-    <aside class="col-12 col-md-9 col-md-9">
+    <aside class="col-12 col-md-9 col-md-6">
     {% thumbnail post.image "900x614" crop="center" upscale=True as im %}
           <img class="card-img my-2" src="{{ im.url }}">
           {% endthumbnail %}
          </aside>
     <p>{{ post.text | linebreaksbr }}</p>
-  <a href="{% url 'home:post_detail' post.pk %}">подробная информация </a><br>
-  <a href="{% url 'home:post_detail' post.pk %}">Комментарии к посту: {{ post.comments.count}} </a>
+ 
+  <a href="{% url 'home:post_detail' post.pk %}">Прокомментровать: {{ post.comments.count}} </a>
+  {% if post.group.slug %}
+        <a href="{% url 'home:group_list' post.group.slug %}">все записи группы</a>
+      {% endif %}
+  
+  </div>
 </article>
  
