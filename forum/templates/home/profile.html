@@ -5,7 +5,7 @@
 {% block content %}
 {% load thumbnail %}
 <article>
-<div class="card my-4 shadow">
+<div class="container py-5">
   <h1>Все посты пользователя {{ author.get_full_name }}</h1>
   <h3>Всего постов: {{ posts_count }}</h3>
   {% if following %}
@@ -28,7 +28,7 @@
         <h1>Все посты пользователя {{author.get_full_name}} </h1>
         <h3>Всего постов: {{posts_count}} </h3>  
         </div>
-        <div class="card my-4 shadow"> 
+        <div class="card my-4 shadow">
         {% for post in page_obj %}
           
           <div class="card-header text-success-50 bg-white    ">
