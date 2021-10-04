@@ -153,9 +153,9 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     }
 }
-# with open('D:\\Dev\\posts_and_scripts\\venv\\password') as f:
-#     PASSWORD = f.read().strip()
-PASSWORD = 'umj2re5g758423'
+with open('D:\\Dev\\posts_and_scripts\\venv\\password') as f:
+    PASSWORD = f.read().strip()
+
 EMAIL_HOST = 'smtp.inbox.ru'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = "snpod@inbox.ru"
