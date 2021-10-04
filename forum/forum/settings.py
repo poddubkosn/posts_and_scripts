@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'about.apps.AboutConfig',
     'django_extensions',
     'sorl.thumbnail',
-    'post_office',
+    
 ]
 
 MIDDLEWARE = [
@@ -155,6 +155,7 @@ CACHES = {
 }
 with open('D:\\Dev\\posts_and_scripts\\venv\\password') as f:
     PASSWORD = f.read().strip()
+
 
 EMAIL_HOST = 'smtp.inbox.ru'
 EMAIL_PORT = 465
