@@ -6,6 +6,7 @@ from .models import User
 from .forms import PostForm, CommentForm
 from django.shortcuts import redirect
 from forum.settings import number_of_elements_in_page
+from django.core.mail import send_mass_mail
 
 
 def index(request):
@@ -93,12 +94,33 @@ def post_edit(request, post_id):
 @login_required
 def add_comment(request, post_id):
     post = get_object_or_404(Post, id=post_id)
+    list_of_recipients = [recipient.author.email for recipient in post.comments.all()]
+    to_whome = post.author.email
+    emails = list(set(list_of_recipients))
+    subject = 'Новый комментарий'
     form = CommentForm(request.POST or None)
     if form.is_valid():
         comment = form.save(commit=False)
         comment.author = request.user
         comment.post = post
         comment.save()
+        messages = []
+        full_name = f'{post.author.first_name} {post.author.last_name}'
+        message_for_author = ('Привет! На твой пост пришел '
+                              'новый комментарий от пользователя '
+                              f'{request.user}.')
+        message_for_other = (f'Привет! На пост "{post}........"  пользователя '
+                             f'{full_name} пришел новый комментарий от '
+                             f'пользователя {request.user}.')
+        message = (subject, message_for_author, 'snpod@inbox.ru', [to_whome, ])
+        send_mass_mail(([message]), fail_silently=False)
+        for email in emails:
+            if email == request.user.email or email == to_whome:
+                continue
+            message = (subject, message_for_other, 'snpod@inbox.ru', [email, ])
+            messages.append(message)
+        if len(messages) > 0:
+            send_mass_mail((messages), fail_silently=False)
     return redirect('home:post_detail', post_id=post_id)
 
 
