@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'about.apps.AboutConfig',
     'django_extensions',
     'sorl.thumbnail',
+    'post_office',
 ]
 
 MIDDLEWARE = [
@@ -137,8 +138,10 @@ STATIC_URL = '/static/'
 LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'home:index'
 
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
+# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+# EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'post_office.EmailBackend'
 number_of_elements_in_page = 10
 
 CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
@@ -150,4 +153,13 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     }
 }
-
+with open('D:\\Dev\\posts_and_scripts\\venv\\password') as f:
+    PASSWORD = f.read().strip()
+EMAIL_HOST = 'smtp.inbox.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = "snpod@inbox.ru"
+EMAIL_HOST_PASSWORD = PASSWORD
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
