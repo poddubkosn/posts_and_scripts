@@ -20,21 +20,21 @@
 
     
     
-    <div class="card-header text-success-50 bg-white    ">
+  <div class="card-header text-success-50 bg-white    ">
     <aside class="col-12 col-md-9 col-md-6">
     {% thumbnail post.image "900x614" crop="center" upscale=True as im %}
           <img class="card-img my-2" src="{{ im.url }}">
           {% endthumbnail %}
          </aside>
-    </div>
-    <div class="card-header text-success-50 bg-white    ">
+  </div>
+  <div class="card-header text-success-50 bg-white    ">
     <p>{{ post.text | linebreaksbr }}</p>
   
-  <a href="{% url 'home:post_detail' post.pk %}">Прокомментровать: {{ post.comments.count}} </a><br>
-  {% if post.group.slug %}
+    <a href="{% url 'home:post_detail' post.pk %}">Прокомментровать: {{ post.comments.count}} </a><br>
+    {% if post.group.slug %}
         <a href="{% url 'home:group_list' post.group.slug %}">все записи группы</a>
       {% endif %}
-   </div>
   </div>
+</div>
 </article>
  

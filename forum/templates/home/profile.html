@@ -3,8 +3,8 @@
   Профайл пользователя {{author.get_full_name}}
 {% endblock %} 
 {% block content %}
-{% load thumbnail %}
-<article>
+
+
 <div class="container py-5">
   <h1>Все посты пользователя {{ author.get_full_name }}</h1>
   <h3>Всего постов: {{ posts_count }}</h3>
@@ -23,35 +23,17 @@
         Подписаться
       </a>
    {% endif %}
-</div>
+
    
-        
+       
         {% for post in page_obj %}
-<div class="card my-4 shadow">
-     <div class="card-header text-success-50 bg-white    ">
-            <span>
-                  Дата публикации: {{ post.pub_date|date:"d E Y" }}
-            </span>
-              
-            <aside class="col-12 col-md-9 col-md-6">
-            {% thumbnail post.image "900x614" crop="center" upscale=True as im %}
-          <img class="card-img my-2" src="{{ im.url }}">
-          {% endthumbnail %}
-          </aside>
-      </div>
-   <div class="card-header text-success-50 bg-white    ">
-            <p>{{ post.text | linebreaksbr }}</p>
-            <a href="{% url 'home:post_detail' post.pk %}">Прокомментровать: {{ post.comments.count}} </a>
-          <br>
-          {% if post.group.slug %}       
-            <a href="{% url 'home:group_list' post.group.slug %}">все записи группы</a> 
-          {% endif %} 
-    </div>   
-</div>   
-        {% endfor %}
-        
-        {% include 'home/includes/paginator.html' %}
+{% include 'home/includes/profile_post.html' %}
+{% endfor %}
+   
+  
+       
+{% include 'home/includes/paginator.html' %}
           
-    
-    </article>
+ </div>   
+   
  {% endblock %}
