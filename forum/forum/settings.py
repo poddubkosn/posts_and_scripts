@@ -157,9 +157,9 @@ with open('D:\\Dev\\posts_and_scripts\\venv\\password') as f:
     PASSWORD = f.read().strip()
 
 
-EMAIL_HOST = 'smtp.inbox.ru'
+EMAIL_HOST = 'smtp.rambler.ru'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = "snpod@inbox.ru"
+EMAIL_HOST_USER = "snpod@rambler.ru"
 EMAIL_HOST_PASSWORD = PASSWORD
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True

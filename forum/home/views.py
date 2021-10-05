@@ -121,7 +121,7 @@ def add_comment(request, post_id):
         for email in emails:
             if email == request.user.email or email == author_email:
                 continue
-            message = (subject, message_for_other, 'snpod@inbox.ru', [email, ])
+            message = (subject, message_for_other, 'snpod@rambler.ru', [email, ])
             messages.append(message)
         if len(messages) > 0:
             send_mass_mail((messages), fail_silently=False)
