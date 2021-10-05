@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Post, Group, Follow
+from .models import Post, Group, Follow, Comment
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from .models import User
@@ -94,8 +94,11 @@ def post_edit(request, post_id):
 @login_required
 def add_comment(request, post_id):
     post = get_object_or_404(Post, id=post_id)
-    list_of_recipients = [recipient.author.email for recipient in post.comments.all()]
-    to_whome = post.author.email
+    # list_of_recipients = [recipient.author.email for recipient in
+    #                       post.comments.all()]
+    list_of_recipients = [recipient.author.email for recipient in
+                          post.comments.select_related('author').all()]
+    author_email = post.author.email
     emails = list(set(list_of_recipients))
     subject = 'Новый комментарий'
     form = CommentForm(request.POST or None)
@@ -112,10 +115,11 @@ def add_comment(request, post_id):
         message_for_other = (f'Привет! На пост "{post}........"  пользователя '
                              f'{full_name} пришел новый комментарий от '
                              f'пользователя {request.user}.')
-        message = (subject, message_for_author, 'snpod@inbox.ru', [to_whome, ])
+        message = (subject, message_for_author, 'snpod@inbox.ru',
+                   [author_email, ])
         send_mass_mail(([message]), fail_silently=False)
         for email in emails:
-            if email == request.user.email or email == to_whome:
+            if email == request.user.email or email == author_email:
                 continue
             message = (subject, message_for_other, 'snpod@inbox.ru', [email, ])
             messages.append(message)
