@@ -107,8 +107,8 @@ def add_comment(request, post_id):
         subject = 'Новый комментарий'
         if author_email != request.user.email:
             message_for_author = ('Привет! На твой пост пришел '
-                              'новый комментарий от пользователя '
-                              f'{request.user}.')
+                                  'новый комментарий от пользователя '
+                                  f'{request.user}.')
             message = (subject, message_for_author, EMAIL_HOST_USER,
                    [author_email, ])
             send_mass_mail(([message]), fail_silently=False)
