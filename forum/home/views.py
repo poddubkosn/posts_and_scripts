@@ -113,7 +113,7 @@ def add_comment(request, post_id):
         message_for_other = (f'Привет! На пост "{post}........"  пользователя '
                              f'{full_name} пришел новый комментарий от '
                              f'пользователя {request.user}.')
-        message = (subject, message_for_author, 'snpod@inbox.ru',
+        message = (subject, message_for_author, EMAIL_HOST_USER,
                    [author_email, ])
         send_mass_mail(([message]), fail_silently=False)
         for email in emails:
