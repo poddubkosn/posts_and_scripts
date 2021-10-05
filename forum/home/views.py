@@ -5,7 +5,7 @@ from django.core.paginator import Paginator
 from .models import User
 from .forms import PostForm, CommentForm
 from django.shortcuts import redirect
-from forum.settings import number_of_elements_in_page
+from forum.settings import number_of_elements_in_page, EMAIL_HOST_USER
 from django.core.mail import send_mass_mail
 
 
@@ -100,29 +100,29 @@ def add_comment(request, post_id):
         comment.author = request.user
         comment.post = post
         comment.save()
-        # list_of_recipients = [recipient.author.email for recipient in
-        #                       post.comments.select_related('author').all()]
-        # author_email = post.author.email
-        # emails = list(set(list_of_recipients))
-        # subject = 'Новый комментарий'
-        # messages = []
-        # full_name = f'{post.author.first_name} {post.author.last_name}'
-        # message_for_author = ('Привет! На твой пост пришел '
-        #                       'новый комментарий от пользователя '
-        #                       f'{request.user}.')
-        # message_for_other = (f'Привет! На пост "{post}........"  пользователя '
-        #                      f'{full_name} пришел новый комментарий от '
-        #                      f'пользователя {request.user}.')
-        # message = (subject, message_for_author, 'snpod@inbox.ru',
-        #            [author_email, ])
-        # send_mass_mail(([message]), fail_silently=False)
-        # for email in emails:
-        #     if email == request.user.email or email == author_email:
-        #         continue
-        #     message = (subject, message_for_other, 'snpod@inbox.ru', [email, ])
-        #     messages.append(message)
-        # if len(messages) > 0:
-        #     send_mass_mail((messages), fail_silently=False)
+        list_of_recipients = [recipient.author.email for recipient in
+                              post.comments.select_related('author').all()]
+        author_email = post.author.email
+        emails = list(set(list_of_recipients))
+        subject = 'Новый комментарий'
+        messages = []
+        full_name = f'{post.author.first_name} {post.author.last_name}'
+        message_for_author = ('Привет! На твой пост пришел '
+                              'новый комментарий от пользователя '
+                              f'{request.user}.')
+        message_for_other = (f'Привет! На пост "{post}........"  пользователя '
+                             f'{full_name} пришел новый комментарий от '
+                             f'пользователя {request.user}.')
+        message = (subject, message_for_author, 'snpod@inbox.ru',
+                   [author_email, ])
+        send_mass_mail(([message]), fail_silently=False)
+        for email in emails:
+            if email == request.user.email or email == author_email:
+                continue
+            message = (subject, message_for_other, EMAIL_HOST_USER, [email, ])
+            messages.append(message)
+        if len(messages) > 0:
+            send_mass_mail((messages), fail_silently=False)
     return redirect('home:post_detail', post_id=post_id)
 
 

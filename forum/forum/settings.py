@@ -157,11 +157,11 @@ with open('D:\\Dev\\posts_and_scripts\\venv\\password') as f:
     PASSWORD = f.read().strip()
 
 
-EMAIL_HOST = '217.69.139.162'
-EMAIL_PORT = 465
-EMAIL_HOST_USER = "snpod@inbox.ru"
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'poddubkosn@gmail.com'
 EMAIL_HOST_PASSWORD = PASSWORD
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
+EMAIL_USE_TLS = True
+# EMAIL_USE_SSL = True
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
