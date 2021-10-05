@@ -105,17 +105,18 @@ def add_comment(request, post_id):
         author_email = post.author.email
         emails = list(set(list_of_recipients))
         subject = 'Новый комментарий'
-        messages = []
-        full_name = f'{post.author.first_name} {post.author.last_name}'
-        message_for_author = ('Привет! На твой пост пришел '
+        if author_email != request.user.email:
+            message_for_author = ('Привет! На твой пост пришел '
                               'новый комментарий от пользователя '
                               f'{request.user}.')
+            message = (subject, message_for_author, EMAIL_HOST_USER,
+                   [author_email, ])
+            send_mass_mail(([message]), fail_silently=False)
+        full_name = f'{post.author.first_name} {post.author.last_name}'
         message_for_other = (f'Привет! На пост "{post}........"  пользователя '
                              f'{full_name} пришел новый комментарий от '
                              f'пользователя {request.user}.')
-        message = (subject, message_for_author, EMAIL_HOST_USER,
-                   [author_email, ])
-        send_mass_mail(([message]), fail_silently=False)
+        messages = []
         for email in emails:
             if email == request.user.email or email == author_email:
                 continue
