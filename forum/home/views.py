@@ -103,25 +103,29 @@ def add_comment(request, post_id):
         list_of_recipients = [recipient.author.email for recipient in
                               post.comments.select_related('author').all()]
         author_email = post.author.email
+        list_of_recipients.append(author_email)
         emails = list(set(list_of_recipients))
         subject = 'Новый комментарий'
-        if author_email != request.user.email:
-            message_for_author = ('Привет! На твой пост пришел '
-                                  'новый комментарий от пользователя '
-                                  f'{request.user}.')
-            message = (subject, message_for_author, EMAIL_HOST_USER,
-                   [author_email, ])
-            send_mass_mail(([message]), fail_silently=False)
-        full_name = f'{post.author.first_name} {post.author.last_name}'
-        message_for_other = (f'Привет! На пост "{post}........"  пользователя '
-                             f'{full_name} пришел новый комментарий от '
-                             f'пользователя {request.user}.')
         messages = []
         for email in emails:
-            if email == request.user.email or email == author_email:
+            if email == request.user.email:
                 continue
-            message = (subject, message_for_other, EMAIL_HOST_USER, [email, ])
-            messages.append(message)
+            if email == author_email:
+                message_for_author = ('Привет! На твой пост пришел '
+                                      'новый комментарий от пользователя '
+                                      f'{request.user}.')
+                message = (subject, message_for_author, EMAIL_HOST_USER,
+                           [author_email, ])
+                messages.append(message)
+            else:
+                full_name = f'{post.author.first_name} {post.author.last_name}'
+                message_for_other = (f'Привет! На пост "{post}........" '
+                                     f'пользователя {full_name} пришел '
+                                     'новый комментарий от '
+                                     f'пользователя {request.user}.')
+                message = (subject, message_for_other, EMAIL_HOST_USER,
+                           [email, ])
+                messages.append(message)
         if len(messages) > 0:
             send_mass_mail((messages), fail_silently=False)
     return redirect('home:post_detail', post_id=post_id)
