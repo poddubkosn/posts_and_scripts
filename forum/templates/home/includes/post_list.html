@@ -28,7 +28,7 @@
          </aside>
   </div>
   <div class="card-header text-success-50 bg-white    ">
-    <p>{{ post.text | linebreaksbr }}</p>
+    <p>{{ post | linebreaksbr }}&#8230;<a href="{% url 'home:post_detail' post.pk %}">далее </p>
   
     <a href="{% url 'home:post_detail' post.pk %}">Прокомментровать: {{ post.comments.count}} </a><br>
     {% if post.group.slug %}
