@@ -25,10 +25,20 @@
    {% endif %}
 
    
-       
+    <div class="row p-0 mb-0 bg-white rounded">
+    <aside class="col-12 col-md-9">   
         {% for post in page_obj %}
-{% include 'home/includes/profile_post.html' %}
-{% endfor %}
+         <div class="shadow-lg p-0 mb-4 bg-white rounded">
+    {% include 'home/includes/profile_post.html' %}
+    </div>
+    {% endfor %}
+   </aside>
+   <article class="col-3 col-md-3">
+
+ЗДЕСЬ МОЖЕТ БЫТЬ ВАША РЕКЛАМА!<br><br>
+САМЫЙ ЛУЧШИЯ РАЗРАБОТЧИК К ВАШИМ УСЛУГАМ!
+
+   </article>
    
   
        
