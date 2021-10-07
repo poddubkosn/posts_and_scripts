@@ -26,7 +26,7 @@
         ЗДЕСЬ МОЖЕТ БЫТЬ ВАША РЕКЛАМА!<br><br>
         САМЫЙ ЛУЧШИЙ РАЗРАБОТЧИК К ВАШИМ УСЛУГАМ!<br>
         snpod@rambler.ru<br>
-        За спам покараю
+        За спам покараю!
         <br><br><br><br><br><br>
 
         <div class="shadow-lg p-0 mb-2 bg-white rounded">
@@ -54,9 +54,21 @@
               </div>
             </div>
               {% endfor %}
-
+        </div>
+        <div class="shadow-lg p-0 mb-2 bg-white rounded">
+              <div class="card-header text-success-50 bg-white    ">
+              <div class="d-flex justify-content-between">
+            СПИСОК ГРУПП:
+            </div>
+            </div>
+            {% for group in group_list %}
+            <div class="card-header text-success-50 bg-white    ">
+              <div class="d-flex justify-content-between">
+            <a href="{% url 'home:group_list' group.slug %}">{{ group.title}}</a>
+            </div>
+            </div>
+            {% endfor %}
             
-          
         </div>
       </article>
     </div>
