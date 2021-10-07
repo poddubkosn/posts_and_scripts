@@ -142,7 +142,7 @@ LOGIN_REDIRECT_URL = 'home:index'
 # EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_BACKEND = 'post_office.EmailBackend'
-number_of_elements_in_page = 3
+number_of_elements_in_page = 5
 
 CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
 MEDIA_URL = '/media/'
