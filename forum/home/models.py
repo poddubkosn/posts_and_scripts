@@ -24,6 +24,11 @@ class Group(models.Model):
 
 
 class Post(models.Model):
+    title = models.CharField(
+        max_length=200,
+        verbose_name='Заголовок поста',
+        help_text='Поле заголовка поста',
+        blank=True, null=True,)
     text = models.TextField(
         verbose_name='Пост',
         help_text='Поле для ввода поста')

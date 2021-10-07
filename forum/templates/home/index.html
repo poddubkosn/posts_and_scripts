@@ -4,32 +4,66 @@
 {% endblock %} 
 {% block content %}
 {% load thumbnail %}
+{% load user_filters %}
 {% load cache %}
 {% cache 20 index_page page_obj %}
-  <div class="container py-5">
+<div class="container py-5">
   {% include 'home/includes/switcher.html' %}
   <article>
 
-<div class="row p-0 mb-0 bg-white rounded">
- <aside class="col-12 col-md-9">
-    {% for post in page_obj %}
-    <div class="shadow-lg p-0 mb-4 bg-white rounded">
-      {% include 'home/includes/post_list.html' %}
-      
-     </div>
-    {% endfor %}
-    </aside> 
-<article class="col-3 col-md-3">
+    <div class="row p-0 mb-0 bg-white rounded">
+      <aside class="col-12 col-md-9">
+        {% for post in page_obj %}
+        <div class="shadow-lg p-0 mb-4 bg-white rounded">
+          <div class="card-header text-success-50 bg-white    ">
+          {% include 'home/includes/post_list.html' %}
+          </div>  
+        </div>
+        {% endfor %}
+      </aside> 
+      <article class="col-3 col-md-3">
 
-ЗДЕСЬ МОЖЕТ БЫТЬ ВАША РЕКЛАМА!<br><br>
-САМЫЙ ЛУЧШИЙ РАЗРАБОТЧИК К ВАШИМ УСЛУГАМ!
+        ЗДЕСЬ МОЖЕТ БЫТЬ ВАША РЕКЛАМА!<br><br>
+        САМЫЙ ЛУЧШИЙ РАЗРАБОТЧИК К ВАШИМ УСЛУГАМ!<br>
+        snpod@rambler.ru<br>
+        За спам покараю
+        <br><br><br><br><br><br>
 
-</article>
-</div>
+        <div class="shadow-lg p-0 mb-2 bg-white rounded">
+        
+        
+          
+          
+         
+          <div class="card-header text-success-50 bg-white    ">
+            <div class="d-flex justify-content-between">
+            ПОСЛЕДНИЕ ПОСТЫ:
+            </div>
+          </div>
+            {% for post in post_list %}
+          
+            <div class="card-header text-success-50 bg-white    ">
+              <div class="d-flex justify-content-between">
+  
 
-</article> 
+               {% if post.title %}     
+               <a href="{% url 'home:post_detail' post.pk %}">{{ post.title}}</a>      
+               {% else %}
+               <a href="{% url 'home:post_detail' post.pk %}">{{ post.text | len_30 }}&#8230;</a> 
+               {% endif %}
+              </div>
+            </div>
+              {% endfor %}
+
+            
+          
+        </div>
+      </article>
+    </div>
+
+  </article> 
  {% include 'home/includes/paginator.html' %}
-  </div> 
+</div> 
 {% endcache %}
 {% endblock %}
  
