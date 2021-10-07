@@ -153,9 +153,9 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     }
 }
-with open('D:\\Dev\\posts_and_scripts\\venv\\password') as f:
-    PASSWORD = f.read().strip()
 
+
+PASSWORD = 'cdgqjhfiezyycygk'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
