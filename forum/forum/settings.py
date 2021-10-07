@@ -20,10 +20,19 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'v02n!4t7=rlx@zim3+ry#7z=v7dmpezrdwk729m4i)bx_$-_w@'
 
-# with open('D:\\Dev\\posts_and_scripts\\venv\\secret_key') as f:
-#     SECRET_KEY = f.read().strip()
+if os.path.exists('D:\\Dev\\posts_and_scripts\\venv\\secret_key'):
+    with open('D:\\Dev\\posts_and_scripts\\venv\\secret_key') as f:
+        SECRET_KEY = f.read().strip()
+    with open('D:\\Dev\\posts_and_scripts\\venv\\password') as f:   
+        PASSWORD = f.read().strip()
+
+else:
+    with open('/home/snpod/secret_key') as f:
+        SECRET_KEY = f.read().strip()
+    with open('/home/snpod/password') as f:   
+        PASSWORD = f.read().strip()
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -160,7 +169,7 @@ CACHES = {
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'poddubkosn@gmail.com'
-EMAIL_HOST_PASSWORD = 'cdgqjhfiezyycygk'
+EMAIL_HOST_PASSWORD = PASSWORD
 EMAIL_USE_TLS = True
 # EMAIL_USE_SSL = True
 SERVER_EMAIL = EMAIL_HOST_USER
