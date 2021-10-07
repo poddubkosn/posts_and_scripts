@@ -1,3 +1,4 @@
+from typing import Reversible
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Group, Follow, Comment
 from django.contrib.auth.decorators import login_required
@@ -11,10 +12,11 @@ from django.core.mail import send_mass_mail
 
 def index(request):
     post_list = Post.objects.all()
+    rev_post_list = list(reversed(post_list))
     paginator = Paginator(post_list, number_of_elements_in_page)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    context = {'page_obj': page_obj}
+    context = {'page_obj': page_obj, 'post_list': rev_post_list[:15]}
     return render(request, 'home/index.html', context)
 
 
