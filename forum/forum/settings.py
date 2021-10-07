@@ -20,12 +20,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
+DEBUG = False
 if os.path.exists('D:\\Dev\\posts_and_scripts\\venv\\secret_key'):
     with open('D:\\Dev\\posts_and_scripts\\venv\\secret_key') as f:
         SECRET_KEY = f.read().strip()
     with open('D:\\Dev\\posts_and_scripts\\venv\\password') as f:   
         PASSWORD = f.read().strip()
+    DEBUG = True
 
 else:
     with open('/home/snpod/secret_key') as f:
@@ -35,7 +36,7 @@ else:
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+
 
 ALLOWED_HOSTS = ['*']
 
