@@ -30,4 +30,6 @@ urlpatterns = [
         template_name='users/password_reset_form.html'),
         name='password_reset_form',),
     path('logout/', LogoutView.as_view(template_name='users/logged_out.html'),
-         name='logout'), ]
+         name='logout'), 
+    path('profile_change/', views.profile_change, name='profile_change'),
+         ]
