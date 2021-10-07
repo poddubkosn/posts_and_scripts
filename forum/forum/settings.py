@@ -155,7 +155,7 @@ CACHES = {
 }
 
 
-PASSWORD = 'cdgqjhfiezyycygk'
+
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
