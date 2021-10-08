@@ -80,7 +80,7 @@
             
             <div class="card-header text-success-50 bg-white    ">
               <div class="d-flex justify-content-between">
-            <a href="{% url 'home:profile' top_user.0 %}">{{ top_user.0}}</a>
+            <a href="{% url 'home:profile' top_user.0.get_full_name %}">{{ top_user.0}}</a>
             </div>
             </div>
             {% endfor %}

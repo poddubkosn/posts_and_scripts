@@ -13,7 +13,8 @@ from operator import itemgetter
 
 def index(request):
     post_list = Post.objects.all()
-    users = [(user.username, user.posts.count()) for user in User.objects.all()]
+    users = [(user, user.posts.count()) for user in
+             User.objects.all() if user.posts.count() > 0]
     sort_user_list = reversed(sorted(users, key=itemgetter(1)))
     group_list = Group.objects.all()
     rev_post_list = list(reversed(post_list))
