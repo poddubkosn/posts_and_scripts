@@ -24,14 +24,14 @@ DEBUG = False
 if os.path.exists('D:\\Dev\\posts_and_scripts\\venv\\secret_key'):
     with open('D:\\Dev\\posts_and_scripts\\venv\\secret_key') as f:
         SECRET_KEY = f.read().strip()
-    with open('D:\\Dev\\posts_and_scripts\\venv\\password') as f:   
+    with open('D:\\Dev\\posts_and_scripts\\venv\\password') as f:
         PASSWORD = f.read().strip()
     DEBUG = True
 
 else:
     with open('/home/snpod/secret_key') as f:
         SECRET_KEY = f.read().strip()
-    with open('/home/snpod/password') as f:   
+    with open('/home/snpod/password') as f:
         PASSWORD = f.read().strip()
 
 

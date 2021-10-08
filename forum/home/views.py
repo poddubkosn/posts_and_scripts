@@ -8,10 +8,13 @@ from .forms import PostForm, CommentForm
 from django.shortcuts import redirect
 from forum.settings import number_of_elements_in_page, EMAIL_HOST_USER
 from django.core.mail import send_mass_mail
+from operator import itemgetter
 
 
 def index(request):
     post_list = Post.objects.all()
+    users = [(user.username, user.posts.count()) for user in User.objects.all()]
+    sort_user_list = reversed(sorted(users, key=itemgetter(1)))
     group_list = Group.objects.all()
     rev_post_list = list(reversed(post_list))
     rev_post_list = list(reversed(rev_post_list[:15]))
@@ -19,7 +22,7 @@ def index(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {'page_obj': page_obj, 'post_list': rev_post_list,
-               'group_list': group_list}
+               'group_list': group_list, 'sort_user_list': sort_user_list}
     return render(request, 'home/index.html', context)
 
 

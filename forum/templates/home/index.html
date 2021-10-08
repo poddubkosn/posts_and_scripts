@@ -70,6 +70,22 @@
             {% endfor %}
             
         </div>
+        <div class="shadow-lg p-0 mb-2 bg-white rounded">
+              <div class="card-header text-success-50 bg-white    ">
+              <div class="d-flex justify-content-between">
+            TOP АВТОРОВ:
+            </div>
+            </div>
+            {% for top_user in sort_user_list %}
+            
+            <div class="card-header text-success-50 bg-white    ">
+              <div class="d-flex justify-content-between">
+            <a href="{% url 'home:profile' top_user.0 %}">{{ top_user.0}}</a>
+            </div>
+            </div>
+            {% endfor %}
+            
+        </div>
       </article>
     </div>
 
