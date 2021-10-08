@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Об авторе проекта{% endblock %}
 {% block content %}
+{% load thumbnail %}
+<div class="container py-5">
 <h1>Привет, я автор. Меня зовут Поддубко Сергей.</h1>
 <h1>snpod@rambler.ru</h1><br>
 <p>
@@ -9,12 +11,21 @@
 
 
 <aside class="col-12 col-md-9 col-md-9">
+ <p>
   Это мой первый сайт который я написал на python - django.
-  Мысли о создании своего сайта занимали меня всегда. 
+  Мысли о создании своего сайта занимали меня всегда.<br> 
   Это очень интересно и в тоже время сложно по 
-  многообразию элементов которые используются в создании сайта. 
+  многообразию элементов которые используются в создании сайта. <br>
   Это мой первый опыт и надеюсь не последний) 
+  </p>
 </aside>
+<div class="card-header text-success-50 bg-white    ">
+    <aside class="col-12 col-md-6 col-md-3">
+    
+          <img class="card-img my-2" src="/media/my_photo.jpg">
+          
+         </aside>
+  </div>
 
-
+</div>
 {% endblock %}
