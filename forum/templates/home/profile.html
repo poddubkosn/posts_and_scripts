@@ -3,6 +3,7 @@
   Профайл пользователя {{author.get_full_name}}
 {% endblock %} 
 {% block content %}
+{% load user_filters %}
 
 
 <div class="container py-5">
@@ -36,7 +37,72 @@
    <article class="col-3 col-md-3">
 
 ЗДЕСЬ МОЖЕТ БЫТЬ ВАША РЕКЛАМА!<br><br>
-САМЫЙ ЛУЧШИЙ РАЗРАБОТЧИК К ВАШИМ УСЛУГАМ!
+        <a href="{% url 'about:author' %}">САМЫЙ ЛУЧШИЙ РАЗРАБОТЧИК К ВАШИМ УСЛУГАМ!</a><br>
+        
+        
+        
+        <br><br><br><br><br><br>
+
+        <div class="shadow-lg p-0 mb-2 bg-white rounded">
+        
+        
+          
+          
+         
+          <div class="card-header text-success-50 bg-white    ">
+            <div class="d-flex justify-content-between">
+            ПОСЛЕДНИЕ ПОСТЫ АВТОРА:
+            </div>
+          </div>
+            {% for post in post_list %}
+          
+            <div class="card-header text-success-50 bg-white    ">
+              <div class="d-flex justify-content-between">
+  
+
+               {% if post.title %}     
+               <a href="{% url 'home:post_detail' post.pk %}">{{ post.title}}</a>      
+               {% else %}
+               <a href="{% url 'home:post_detail' post.pk %}">{{ post.text | len_30 }}&#8230;</a> 
+               {% endif %}
+              </div>
+            </div>
+              {% endfor %}
+        </div>
+        <div class="shadow-lg p-0 mb-2 bg-white rounded">
+              <div class="card-header text-success-50 bg-white    ">
+              <div class="d-flex justify-content-between">
+            СПИСОК ГРУПП:
+            </div>
+            </div>
+            {% for group in group_list %}
+            <div class="card-header text-success-50 bg-white    ">
+              <div class="d-flex justify-content-between">
+            <a href="{% url 'home:group_list' group.slug %}">{{ group.title}}</a>
+            </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+        <div class="shadow-lg p-0 mb-2 bg-white rounded">
+              <div class="card-header text-success-50 bg-white    ">
+              <div class="d-flex justify-content-between">
+            TOP АВТОРОВ:
+            </div>
+            </div>
+            {% for top_user in sort_user_list %}
+            
+            <div class="card-header text-success-50 bg-white    ">
+              <div class="d-flex justify-content-between">
+            <a href="{% url 'home:profile' top_user.0 %}">{{ top_user.0.get_full_name}} - {{ top_user.1 }}</a>
+            </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+      </article>
+    </div>
+
 
    </article>
    

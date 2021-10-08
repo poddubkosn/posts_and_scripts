@@ -46,12 +46,20 @@ def profile(request, username):
         author__username=username,
         user__username=request.user.username).exists()
     post_list = author.posts.all()
+    users = [(user, user.posts.count()) for user in
+             User.objects.all() if user.posts.count() > 0]
+    sort_user_list = reversed(sorted(users, key=itemgetter(1)))
+    group_list = Group.objects.all()
+    rev_post_list = list(reversed(post_list))
+    rev_post_list = list(reversed(rev_post_list[:15]))
     posts_count = post_list.count()
     paginator = Paginator(post_list, number_of_elements_in_page)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {'author': author, 'page_obj': page_obj,
-               'posts_count': posts_count, 'following': following, }
+               'posts_count': posts_count, 'following': following,
+               'post_list': rev_post_list, 'group_list': group_list,
+               'sort_user_list': sort_user_list}
     return render(request, 'home/profile.html', context)
 
 
