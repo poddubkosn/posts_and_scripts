@@ -5,8 +5,7 @@
 {% block content %}
 {% load thumbnail %}
 {% load user_filters %}
-{% load cache %}
-{% cache 20 index_page_comments page_obj %}
+
 <div class="container py-5">
   {% include 'home/includes/switcher.html' %}
   <article>
@@ -106,6 +105,6 @@
   </article> 
  {% include 'home/includes/paginator.html' %}
 </div> 
-{% endcache %}
+
 {% endblock %}
  
