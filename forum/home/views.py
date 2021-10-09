@@ -35,7 +35,7 @@ def index(request, author_comment=None):
                'group_list': group_list, 'sort_user_list': sort_user_list,
                'sort_author_comments_list': sort_author_comments_list}
     if author_comment:
-        return render(request, 'home/index_of_comments.html', context)
+        return render(request, 'home/postcomments.html', context)
     return render(request, 'home/index.html', context)
 
 
