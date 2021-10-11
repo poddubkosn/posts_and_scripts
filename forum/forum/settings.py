@@ -26,6 +26,10 @@ if os.path.exists('D:\\Dev\\posts_and_scripts\\venv\\secret_key'):
         SECRET_KEY = f.read().strip()
     with open('D:\\Dev\\posts_and_scripts\\venv\\password') as f:
         PASSWORD = f.read().strip()
+    with open('D:\\Dev\\posts_and_scripts\\venv\\token_telegramm_bot') as f:
+        TOKEN_TELEGRAMM = f.read().strip()
+    with open('D:\\Dev\\posts_and_scripts\\venv\\chat_id') as f:
+        CHAT_ID = f.read().strip()
     DEBUG = True
 
 else:
@@ -33,6 +37,10 @@ else:
         SECRET_KEY = f.read().strip()
     with open('/home/snpod/password') as f:
         PASSWORD = f.read().strip()
+    with open('/home/snpod/token_telegramm_bot') as f:
+        TOKEN_TELEGRAMM = f.read().strip()
+    with open('/home/snpod/chat_id') as f:
+        CHAT_ID = f.read().strip()
 
 
 # SECURITY WARNING: don't run with debug turned on in production!

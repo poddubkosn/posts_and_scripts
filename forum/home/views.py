@@ -6,9 +6,11 @@ from django.core.paginator import Paginator
 from .models import User
 from .forms import PostForm, CommentForm
 from django.shortcuts import redirect
-from forum.settings import number_of_elements_in_page, EMAIL_HOST_USER
+from forum.settings import number_of_elements_in_page
+from forum.settings import EMAIL_HOST_USER, TOKEN_TELEGRAMM, CHAT_ID
 from django.core.mail import send_mass_mail
 from operator import itemgetter
+from telegram import Bot
 
 
 def index(request, author_comment=None):
@@ -36,6 +38,11 @@ def index(request, author_comment=None):
                'sort_author_comments_list': sort_author_comments_list}
     if author_comment:
         return render(request, 'home/postcomments.html', context)
+    chat_id = CHAT_ID
+    text = 'Зашли на твой сайт!'
+    bot = Bot(token=TOKEN_TELEGRAMM)
+    # Отправка сообщения
+    bot.send_message(chat_id, text)
     return render(request, 'home/index.html', context)
 
 
