@@ -35,10 +35,14 @@
           </ul>
         </aside>
         <article class="col-12 col-md-9">
+        {% if post.title %}
+          <p>{{ post.title}}</p>
+          {% endif %}
           {% thumbnail post.image "900x614" crop="center" upscale=True as im %}
           <img class="card-img my-2" src="{{ im.url }}">
           {% endthumbnail %}
-          <p>{{ post.text | linebreaksbr}}</p>
+          
+          <p>{{ post.text | safe|linebreaksbr}}</p>
 {% load user_filters %}
 {% if user.is_authenticated %}
   <div class="card my-4">

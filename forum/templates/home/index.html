@@ -47,7 +47,7 @@
                {% if post.title %}     
                <a href="{% url 'home:post_detail' post.pk %}">{{ post.title}}</a>      
                {% else %}
-               <a href="{% url 'home:post_detail' post.pk %}">{{ post.text | len_30 }}&#8230;</a> 
+               <a href="{% url 'home:post_detail' post.pk %}">Без заголовка&#8230;</a> 
                {% endif %}
               </div>
             </div>

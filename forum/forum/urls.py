@@ -18,6 +18,9 @@ from django.contrib import admin
 from django.urls.conf import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from ckeditor_uploader import views as ckeditor_views
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import never_cache
 
 handler404 = 'core.views.page_not_found'
 handler500 = 'core.views.server_error'
@@ -30,9 +33,26 @@ urlpatterns = [
     path('auth/', include('users.urls', namespace='users')),
     path('auth/', include('django.contrib.auth.urls')),
     path('about/', include('about.urls', namespace='about')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+    # path('ckeditor/upload/', login_required(
+    #     ckeditor_views.upload), name='ckeditor_upload'),
+    # path('ckeditor/browse/', never_cache(
+    #     login_required(ckeditor_views.browse)), name='ckeditor_browse'),
+    
 ]
 
 if settings.DEBUG:
+    import mimetypes
+    mimetypes.add_type("application/javascript", ".js", True)
     urlpatterns += static(
         settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
     )
+    import debug_toolbar
+    urlpatterns += (path('__debug__/', include(debug_toolbar.urls)),)
+
+# if settings.DEBUG:
+#     urlpatterns += static(
+#         settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+#     )
+#     # urlpatterns += static(settings.STATIC_URL,
+#     #                       document_root=settings.STATIC_ROOT)

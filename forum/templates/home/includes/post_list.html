@@ -16,20 +16,26 @@
      
     
         <a href="{% url 'home:profile' post.author.username %}"class="text-dark">Все посты пользователя</a>
+        
   </div> 
 
     
     
   <div class="card-header text-success-50 bg-white    ">
     <aside class="col-12 col-md-9 col-md-6">
+    {% if post.title %}
+          {{ post.title}}
+          {% endif %}
     {% thumbnail post.image "900x614" crop="center" upscale=True as im %}
+    
           <img class="card-img my-2" src="{{ im.url }}">
           {% endthumbnail %}
          </aside>
   </div>
   <div class="card-header text-success-50 bg-white    ">
-    <p>{{ post | linebreaksbr }}&#8230;<a href="{% url 'home:post_detail' post.pk %}">далее </p>
   
+    <p >{{ post.text|safe|linebreaks }}</p>
+    
     <a href="{% url 'home:post_detail' post.pk %}"><button type="button" class="btn btn-outline-primary btn-sm">Прокомментровать: {{ post.comments.count}}</button></a>
           
           {% if post.group %}       

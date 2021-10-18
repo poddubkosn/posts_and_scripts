@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
+
 
 User = get_user_model()
 
@@ -29,8 +32,10 @@ class Post(models.Model):
         verbose_name='Заголовок поста',
         help_text='Поле заголовка поста',
         blank=True, null=True,)
-    text = models.TextField(
+    text = RichTextUploadingField(
         verbose_name='Пост',
+        null=True,
+        max_length=12000,
         help_text='Поле для ввода поста')
     pub_date = models.DateTimeField(
         auto_now_add=True,

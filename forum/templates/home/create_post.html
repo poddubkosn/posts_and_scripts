@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% block title %}
   {% if is_edit %}
   Редактирование поста
@@ -39,6 +40,7 @@
               action="{% url action_url %}"
               {% endif %}
               {% csrf_token %}
+              {{ form.media }}
                     {% for field in form %}
                      <div class="form-group row my-3"
                        {% if field.field.required %} 
