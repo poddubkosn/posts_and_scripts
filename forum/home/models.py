@@ -31,7 +31,7 @@ class Post(models.Model):
         max_length=200,
         verbose_name='Заголовок поста',
         help_text='Поле заголовка поста',
-        blank=True, null=True,)
+        null=True,)
     text = RichTextUploadingField(
         verbose_name='Пост',
         null=True,
