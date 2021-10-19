@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 from ckeditor_uploader import views as ckeditor_views
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
+from django.views.generic.base import TemplateView
 
 handler404 = 'core.views.page_not_found'
 handler500 = 'core.views.server_error'
@@ -38,6 +39,8 @@ urlpatterns = [
     #     ckeditor_views.upload), name='ckeditor_upload'),
     # path('ckeditor/browse/', never_cache(
     #     login_required(ckeditor_views.browse)), name='ckeditor_browse'),
+    path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type="text/plain")),
+    
     
 ]
 
