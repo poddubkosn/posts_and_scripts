@@ -176,12 +176,16 @@ def follow_index(request):
     group_list = Group.objects.all()
     rev_post_list = list(reversed(post_list))
     rev_post_list = list(reversed(rev_post_list[:15]))
-    
+    author_comments = [(user, user.comments.count()) for user in
+                       User.objects.all() if user.comments.count() > 0]
+    sort_author_comments_list = reversed(sorted(author_comments,
+                                         key=itemgetter(1)))
     paginator = Paginator(post_list, number_of_elements_in_page)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {'page_obj': page_obj, 'post_list': rev_post_list,
-               'group_list': group_list, 'sort_user_list': sort_user_list}
+               'group_list': group_list, 'sort_user_list': sort_user_list,
+               'sort_author_comments_list': sort_author_comments_list}
     return render(request, 'home/follow.html', context)
 
 
