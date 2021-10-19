@@ -1,5 +1,7 @@
+import re
 from django import template
 register = template.Library()
+
 
 
 @register.filter
@@ -15,3 +17,16 @@ def len_15(word):
 def len_30(word):
     word_new = word[:30]
     return word_new
+
+@register.filter
+def only_text(word):
+    match_img = re.findall(r'<img.*src=.*</p>', word, re.X)
+    match_iframe = re.match(r'.*iframe.*src=.*', word)
+    if match_iframe:
+        return word
+    # if match_text_only:
+    #     return match_text_only
+    else:
+        if match_img:
+            return word[:100] + str(match_img)
+        return word[:200]

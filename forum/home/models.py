@@ -35,7 +35,7 @@ class Post(models.Model):
     text = RichTextUploadingField(
         verbose_name='Пост',
         null=True,
-        max_length=12000,
+        max_length=50000,
         help_text='Поле для ввода поста')
     pub_date = models.DateTimeField(
         auto_now_add=True,
