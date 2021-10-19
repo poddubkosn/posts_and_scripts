@@ -85,7 +85,7 @@ class Comment(models.Model):
         related_name='comments',
         verbose_name='Автор комментария',
         help_text='выберите автора')
-    text = models.TextField(
+    text = RichTextUploadingField(
         verbose_name='Комментарий',
         help_text='Поле для ввода комментария')
     created = models.DateTimeField(

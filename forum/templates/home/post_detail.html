@@ -51,6 +51,7 @@
       <form method="post" action="{% url 'home:add_comment' post.id %}">
         {% csrf_token %}      
         <div class="form-group mb-2">
+        {{ form.media }}
           {{ form.text|addclass:"form-control"}}
         </div>
         <button type="submit" class="btn btn-primary">Отправить</button>
@@ -67,7 +68,7 @@
         </a>
       </h5>
         <p>
-         {{ comment.text }}
+         {{ comment.text|safe|linebreaks }}
         </p>
       </div>
     </div>
