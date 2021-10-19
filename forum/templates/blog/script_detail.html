@@ -22,14 +22,15 @@
           {% thumbnail myscript.image "600x339" crop="center" upscale=True as im %}
           <img class="card-img my-2" src="{{ im.url }}">
           {% endthumbnail %}
-          <p>{{ myscript.text | linebreaksbr}}</p>
+          <p>{{ myscript.text | safe}}</p>
 {% load user_filters %}
 {% if user.is_authenticated %}
   <div class="card my-4">
     <h5 class="card-header">Добавить комментарий:</h5>
     <div class="card-body">
       <form method="post" action="{% url 'blog:add_comment' myscript.slug %}">
-        {% csrf_token %}      
+        {% csrf_token %}
+        {{ form.media }}      
         <div class="form-group mb-2">
           {{ form.text|addclass:"form-control"}}
         </div>
@@ -47,7 +48,7 @@
         </a>
       </h5>
         <p>
-         {{ comment.text }}
+         {{ comment.text|safe }}
         </p>
       </div>
     </div>

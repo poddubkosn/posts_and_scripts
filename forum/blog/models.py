@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
+from ckeditor_uploader.fields import RichTextUploadingField
 
 User = get_user_model()
 
@@ -16,7 +17,7 @@ class MyScripts(models.Model):
         db_index=True,
         verbose_name='slug',
         help_text='Поле для ввода slug')
-    text = models.TextField(
+    text = RichTextUploadingField(
         verbose_name='техт скрипта',
         help_text='Поле для ввода техта скрипта')
     pub_date = models.DateTimeField(auto_now_add=True,
@@ -99,7 +100,7 @@ class Comment(models.Model):
         related_name='comments_blog',
         verbose_name='Автор комментария',
         help_text='выберите автора')
-    text = models.TextField(
+    text = RichTextUploadingField(
         verbose_name='Комментарий',
         help_text='Поле для ввода комментария')
     created = models.DateTimeField(
