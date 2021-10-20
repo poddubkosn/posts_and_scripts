@@ -34,10 +34,11 @@
          </aside>
   </div>
   <div class="card-header text-success-50 bg-white    ">
-    
-      {{ post.text|only_text|safe }}&#8230;<a href="{% url 'home:post_detail' post.pk %}">далее</a>
-    
-      <a href="{% url 'home:post_detail' post.pk %}"><button type="button" class="btn btn-outline-primary btn-sm">Прокомментровать: {{ post.comments.count}}</button></a>
+    <p>
+      {{ post.text|only_text|safe }} 
+    </p>
+    <a href="{% url 'home:post_detail' post.pk %}"><button type="button" class="btn btn-outline-primary btn-sm">Подробнее</button></a>
+    <a href="{% url 'home:post_detail' post.pk %}"><button type="button" class="btn btn-outline-primary btn-sm">Прокомментровать: {{ post.comments.count}}</button></a>
           
           {% if post.group %}       
             <a href="{% url 'home:group_list' post.group.slug %}"><button type="button" class="btn btn-outline-primary btn-sm">Все записи группы {{post.group}}</button></a> 
