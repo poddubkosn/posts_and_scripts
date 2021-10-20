@@ -28,7 +28,7 @@ def only_text(word):
         # return (f'{match_iframe[1]} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="315"{match_iframe[3]}'
         #         f'title="YouTube video player" width="560" {match_iframe[5]}')
         return (f'{match_iframe[1]} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="315" {match_iframe[2]}'
-                f' title="YouTube video player" width="560" ></iframe></p>')
+                f' title="YouTube video player" width="80%" ></iframe></p>')
     # if match_text_only:
     #     return match_text_only
     else:
