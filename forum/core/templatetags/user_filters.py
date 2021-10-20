@@ -21,10 +21,10 @@ def len_30(word):
 @register.filter
 def only_text(word):
     match_img = re.findall(r'<img.*src=.*</p>', word, re.X)
-    match_iframe = re.match(r'(.*iframe)(.*src=.*)(width="640")(.*)', word)
+    match_iframe = re.match(r'(.*iframe.*)(height=".*")(.*src=.*)(width=".*")(.*)', word)
     if match_iframe:
-        return (f'{match_iframe[1]}{match_iframe[2]}'
-                f'width="100%" {match_iframe[4]}')
+        return (f'{match_iframe[1]} {match_iframe[3]}'
+                f'width="100%" {match_iframe[5]}')
     # if match_text_only:
     #     return match_text_only
     else:
