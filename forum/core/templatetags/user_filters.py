@@ -23,7 +23,7 @@ def only_text(word):
     match_img = re.findall(r'<img.*src=.*</p>', word, re.X)
     match_iframe = re.match(r'.*iframe.*src=.*', word)
     if match_iframe:
-        return word
+        return f'{word} class="embed-responsive-item"'
     # if match_text_only:
     #     return match_text_only
     else:
