@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load user_filters %}
 {% block title %}
   Пост {{ post_title }}
 {% endblock %} 
@@ -42,7 +43,7 @@
           <img class="card-img my-2" src="{{ im.url }}">
           {% endthumbnail %}
           
-          <p>{{ post.text | safe|linebreaksbr}}</p>
+          <p>{{ post.text|only_text|safe}}</p>
 {% load user_filters %}
 {% if user.is_authenticated %}
   <div class="card my-4">
