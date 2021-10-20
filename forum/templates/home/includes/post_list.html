@@ -34,12 +34,10 @@
          </aside>
   </div>
   <div class="card-header text-success-50 bg-white    ">
-  <p class="card-text">
-  <p style="text-align:center">
-    {{ post.text|only_text|safe }}&#8230;<a href="{% url 'home:post_detail' post.pk %}">далее</a>
-  </p>
-  </p>  
-    <a href="{% url 'home:post_detail' post.pk %}"><button type="button" class="btn btn-outline-primary btn-sm">Прокомментровать: {{ post.comments.count}}</button></a>
+    <div class="embed-responsive embed-responsive-16by9">
+      {{ post.text|only_text|safe }}&#8230;<a href="{% url 'home:post_detail' post.pk %}">далее</a>
+    </div>  
+      <a href="{% url 'home:post_detail' post.pk %}"><button type="button" class="btn btn-outline-primary btn-sm">Прокомментровать: {{ post.comments.count}}</button></a>
           
           {% if post.group %}       
             <a href="{% url 'home:group_list' post.group.slug %}"><button type="button" class="btn btn-outline-primary btn-sm">Все записи группы {{post.group}}</button></a> 
