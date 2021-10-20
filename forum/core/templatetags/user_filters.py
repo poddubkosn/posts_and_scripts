@@ -24,7 +24,7 @@ def only_text(word):
     match_iframe = re.match(r'(.*iframe)(.*src=.*)(width="640")(.*)', word)
     if match_iframe:
         return (f'{match_iframe[1]}{match_iframe[2]}'
-                f'width="80%" {match_iframe[4]}')
+                f'width="100%" {match_iframe[4]}')
     # if match_text_only:
     #     return match_text_only
     else:
