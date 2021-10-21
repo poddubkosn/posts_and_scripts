@@ -191,7 +191,7 @@ CKEDITOR_CONFIGS = {
                        'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl',]},
             {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
             {'name': 'insert',
-             'items': ['Image', 'Youtube', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']},
+             'items': ['Image', 'Youtube', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak']},
             {'name': 'tools', 'items': ['Maximize',]},
         ],
         'toolbar': 'YourCustomToolbarConfig',  # put selected toolbar config here

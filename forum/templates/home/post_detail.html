@@ -42,8 +42,9 @@
           {% thumbnail post.image "900x614" crop="center" upscale=True as im %}
           <img class="card-img my-2" src="{{ im.url }}">
           {% endthumbnail %}
-          
+          <article class="col-12 col-md-9">
           <p>{{ post.text|only_text|safe}}</p>
+          </article>
 {% load user_filters %}
 {% if user.is_authenticated %}
   <div class="card my-4">
