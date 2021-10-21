@@ -27,8 +27,12 @@ def only_text(word):
         # return word
         # return (f'{match_iframe[1]} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="315"{match_iframe[3]}'
         #         f'title="YouTube video player" width="560" {match_iframe[5]}')
-        return (f'<div class="embed-responsive embed-responsive-16by9"> {match_iframe[1]} class="embed-responsive-item" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" {match_iframe[2]}'
-                f' title="YouTube video player"></iframe></div>')
+        # return (f'<div class="embed-responsive embed-responsive-16by9"> {match_iframe[1]} class="embed-responsive-item" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" {match_iframe[2]}'
+        #         f' title="YouTube video player"></iframe></div>')
+
+
+        return (f'<div class="embed-responsive embed-responsive-16by9">{match_iframe[1]} class="embed-responsive-item" width="560" height="315" {match_iframe[2]}'
+                f' title="YouTube video player" allowfullscreen></iframe></div>')
     # if match_text_only:
     #     return match_text_only
     else:
