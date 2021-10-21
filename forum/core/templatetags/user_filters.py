@@ -31,7 +31,7 @@ def only_text(word):
         #         f' title="YouTube video player"></iframe></div>')
 
 
-        return (f'<div class="ratio ratio-16x9">{match_iframe[1]} class="embed-responsive-item" {match_iframe[2]}'
+        return (f'<div class="ratio ratio-16x9">{match_iframe[1]}  {match_iframe[2]}'
                 f' title="YouTube video player" allowfullscreen></iframe></div>')
     # if match_text_only:
     #     return match_text_only
