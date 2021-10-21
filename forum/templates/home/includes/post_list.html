@@ -35,9 +35,9 @@
          </aside>
   </div>
   <div class="card-header text-success-50 bg-white    ">
-    
+    <article class="col-12 col-md-9">
       {{ post.text|only_text|safe }} 
-    
+    </article>
     <a href="{% url 'home:post_detail' post.pk %}"><button type="button" class="btn btn-outline-primary btn-sm">Подробнее</button></a>
     <a href="{% url 'home:post_detail' post.pk %}"><button type="button" class="btn btn-outline-primary btn-sm">Прокомментровать: {{ post.comments.count}}</button></a>
           
