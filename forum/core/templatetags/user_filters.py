@@ -24,7 +24,7 @@ def len_30(word):
 def only_text(word):
     word = word.split('\n')
     word = ' '.join(word)
-    match_img = re.match(r'(.*)(<img.*src=.*</p>)', word,)
+    match_img = re.match(r'(.*)(<img.*src=.*</p>)(.*)', word,)
     match_iframe = re.match(r'(.*)<p><iframe.*(src=.*)'
                             'width=".*"></iframe></p>(.*)', word,)
     if match_iframe:
@@ -34,17 +34,17 @@ def only_text(word):
                 ' picture-in-picture" allowfullscreen="" frameborder="0"'
                 f' {match_iframe[2]} title="YouTube video player">'
                 f'</iframe></div>{match_iframe.group(3)[:100]}')
-    else:
-        if match_img:
-            return (f'{match_img.group(1)[:100]} {match_img.group(2)}')
-        return word[:200]
+    elif match_img:
+        return (f'{match_img.group(1)[:100]} {match_img.group(2)}'
+                f' {match_img.group(3)[:100]}')
+    return word[:200]
 
 
 @register.filter
 def only_text_detail(word):
     word = word.split('\n')
     word = ' '.join(word)
-    match_img = re.match(r'(.*)(<img.*src=.*</p>)', word,)
+    match_img = re.match(r'(.*)(<img.*src=.*</p>)(.*)', word,)
     match_iframe = re.match(r'(.*)<p><iframe.*(src=.*)'
                             'width=".*"></iframe></p>(.*)', word,)
     if match_iframe:
@@ -54,7 +54,7 @@ def only_text_detail(word):
                 ' picture-in-picture" allowfullscreen="" frameborder="0"'
                 f' {match_iframe[2]} title="YouTube video player">'
                 f'</iframe></div>{match_iframe.group(3)}')
-    else:
-        if match_img:
-            return (f'{match_img.group(1)} {match_img.group(2)}')
-        return word
+    elif match_img:
+        return (f'{match_img.group(1)} {match_img.group(2)}'
+                f' {match_img.group(3)}')
+    return word
