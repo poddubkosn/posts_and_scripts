@@ -43,7 +43,7 @@
           <img class="card-img my-2" src="{{ im.url }}">
           {% endthumbnail %}
           <article class="col-12 col-md-9">
-          <p>{{ post.text|only_text|safe}}</p>
+          <p>{{ post.text|only_text_detail|safe}}</p>
           </article>
 {% load user_filters %}
 {% if user.is_authenticated %}

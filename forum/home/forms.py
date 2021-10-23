@@ -1,6 +1,5 @@
 from django import forms
 from .models import Comment, Post
-from ckeditor.widgets import CKEditorWidget 
 
 
 class PostForm(forms.ModelForm):
