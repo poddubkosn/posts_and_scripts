@@ -1,31 +1,126 @@
 {% extends 'base.html' %}
+{% load user_filters %}
 {% block title %}
   Записи сообщества {{ group }}
 {% endblock %} 
 {% block content %}
 {% load thumbnail %}
   <div class="container py-5">
-    <h1>{{ group.title }}</h1>
-      <p>
-        {{ group.description }}
-      </p>
-      {% for post in page_obj %}
-        <article>
-          <ul>
-            <li>
-              Автор: {{ post.author.get_full_name }}
-            </li>
-            <li>
-              Дата публикации: {{ post.pub_date|date:"d E Y" }}
-            </li>
-          </ul>
-          {% thumbnail post.image "960x669" crop="center" upscale=True as im %}
-          <img class="card-img my-2" src="{{ im.url }}">
-          {% endthumbnail %}
-          <p>{{ post.text }}</p>
-        </article>
-        {% if not forloop.last %}<hr>{% endif %}
-        {% endfor %} 
-  </div>  
-  {% include 'home/includes/paginator.html' %}
+       <h1>{{ group.title }}</h1>
+          <p>
+           {{ group.description }}
+          </p>
+    <article>
+      <div class="row p-0 mb-0 bg-white rounded">
+        <aside class="col-12 col-md-9">
+            {% for post in page_obj %}
+          <div class="shadow-lg p-0 mb-4 bg-white rounded">
+            <div class="card-header text-success-50 bg-white    ">
+              <article>
+                   <ul>
+                   <li>
+                   Автор: {{ post.author.get_full_name }}
+                   </li>
+                   <li>
+                    Дата публикации: {{ post.pub_date|date:"d E Y" }}
+                   </li>
+                   </ul>
+                   {% thumbnail post.image "960x669" crop="center" upscale=True as im %}
+                    <img class="card-img my-2" src="{{ im.url }}">
+                   {% endthumbnail %}
+          
+                    <p>{{ post.text|only_text_detail|safe}}</p>
+        
+              </article>
+            </div>
+          </div>
+               {% endfor %} 
+  
+        </aside> 
+        <article class="col-12 col-sm-3">
+
+        ЗДЕСЬ МОЖЕТ БЫТЬ ВАША РЕКЛАМА!<br><br><br><br>
+        <a href="{% url 'about:author' %}">САМЫЙ ЛУЧШИЙ РАЗРАБОТЧИК К ВАШИМ УСЛУГАМ!</a><br>
+        <br><br><br>
+
+        <div class="shadow-lg p-0 mb-2 bg-white rounded">
+        
+        
+          
+          
+         
+          <div class="card-header text-success-50 bg-white    ">
+            <div class="d-flex justify-content-between">
+            ПОСЛЕДНИЕ ПОСТЫ:
+            </div>
+          </div>
+            {% for post in post_list %}
+          
+            <div class="card-header text-success-50 bg-white    ">
+              <div class="d-flex justify-content-between">
+  
+
+               {% if post.title %}     
+               <a href="{% url 'home:post_detail' post.pk %}">{{ post.title}}</a>      
+               {% else %}
+               <a href="{% url 'home:post_detail' post.pk %}">Без заголовка&#8230;</a> 
+               {% endif %}
+              </div>
+            </div>
+              {% endfor %}
+        </div>
+        <div class="shadow-lg p-0 mb-2 bg-white rounded">
+              <div class="card-header text-success-50 bg-white    ">
+              <div class="d-flex justify-content-between">
+            СПИСОК ГРУПП:
+            </div>
+            </div>
+            {% for group in group_list %}
+            <div class="card-header text-success-50 bg-white    ">
+              <div class="d-flex justify-content-between">
+            <a href="{% url 'home:group_list' group.slug %}">{{ group.title}}</a>
+            </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+        <div class="shadow-lg p-0 mb-2 bg-white rounded">
+              <div class="card-header text-success-50 bg-white    ">
+              <div class="d-flex justify-content-between">
+            TOP АВТОРОВ:
+            </div>
+            </div>
+            {% for top_user in sort_user_list %}
+            
+            <div class="card-header text-success-50 bg-white    ">
+              <div class="d-flex justify-content-between">
+            <a href="{% url 'home:profile' top_user.0 %}">{{ top_user.0.get_full_name}} - {{ top_user.1 }}</a>
+            </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+        <div class="shadow-lg p-0 mb-2 bg-white rounded">
+              <div class="card-header text-success-50 bg-white    ">
+              <div class="d-flex justify-content-between">
+            TOP КОММЕНТАТОРОВ:
+            </div>
+            </div>
+            {% for author_comment in sort_author_comments_list %}
+            
+            <div class="card-header text-success-50 bg-white    ">
+              <div class="d-flex justify-content-between">
+            <a href="{% url 'home:index' author_comment.0.username %}">{{ author_comment.0.get_full_name}} - {{ author_comment.1 }}</a>
+            </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+      </div>
+    </article>
+  
+
+    
+    {% include 'home/includes/paginator.html' %}
+  </div>
   {% endblock %}
