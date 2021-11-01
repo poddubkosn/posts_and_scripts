@@ -40,6 +40,7 @@ urlpatterns = [
     # path('ckeditor/browse/', never_cache(
     #     login_required(ckeditor_views.browse)), name='ckeditor_browse'),
     path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type="text/plain")),
+    path('api/', include('api.urls', namespace='api')),
     
     
 ]

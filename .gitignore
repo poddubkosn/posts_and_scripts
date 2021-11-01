@@ -151,4 +151,5 @@ forum/forum/settings.py
 forum/media/
 settings.py
 forum/settings.py
+temp/
 
