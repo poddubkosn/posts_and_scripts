@@ -1,9 +1,12 @@
 from rest_framework import viewsets
+from home.models import Comment
 from home.models import Post, User, Group
 from .serializers import PostSerializer, UserSerializer
 from .serializers import GroupSerializer, CommentSerializer
 from .permission import CustomerAccessPermission
 from django.shortcuts import get_object_or_404
+from rest_framework.response import Response
+from rest_framework import status
 
 
 class GroupViewSet(viewsets.ReadOnlyModelViewSet):
@@ -36,4 +39,6 @@ class CommentViewSet(viewsets.ModelViewSet):
         return new_queryset
 
     def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+        post_id = self.kwargs.get('post_id')
+        post = get_object_or_404(Post, id=post_id)
+        serializer.save(post=post, author=self.request.user)
