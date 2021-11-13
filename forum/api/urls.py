@@ -3,6 +3,7 @@ from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
 
 from .views import PostViewSet, GroupViewSet, CommentViewSet, UserViewSet
+from .views import FollowViewSet, AboutAPIView
 
 app_name = 'api'
 
@@ -10,6 +11,7 @@ app_name = 'api'
 router = DefaultRouter()
 router.register('groups', GroupViewSet)
 router.register('users', UserViewSet)
+router.register('follow', FollowViewSet, basename='fol')
 router.register('posts', PostViewSet)
 router.register(r'posts/(?P<post_id>\d+)/comments', CommentViewSet,
                 basename='comments')
@@ -21,5 +23,5 @@ urlpatterns = [
     #path('v1/api-token-auth/', views.obtain_auth_token),
     path('v1/auth/', include('djoser.urls')),
     path('v1/auth/', include('djoser.urls.jwt')),
-
+    path('about/', AboutAPIView.as_view(), name='aboutapi'),
 ]

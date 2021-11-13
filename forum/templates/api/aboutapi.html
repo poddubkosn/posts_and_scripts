@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Об авторе проекта{% endblock %}
+{% block content %}
+{% load thumbnail %}
+<div class="container py-5">
+<h1>API проекта.</h1>
+
+<p>
+{{ some_data }}
+</p>
+
+
+<aside class="col-12 col-md-9 col-md-9">
+ <p>
+  Для использования API проекта необходимо воспользоваться документацией на данные проект:<br>
+  <ul>
+  <li> 
+          <a target="_blank" href="http://127.0.0.1:8000/swagger/">SWAGGER</a>
+        </li>
+    <li class="nav-item"> 
+          <a target="_blank" href="http://127.0.0.1:8000/redoc/">REDOC</a>
+        </li>    
+  
+  </ul>
+  </p>
+
+  </div>
+
+</div>
+{% endblock %}

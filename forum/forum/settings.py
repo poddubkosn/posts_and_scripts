@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'rest_framework',
     'djoser',
+    'drf_yasg',
     'home.apps.HomeConfig',
     'core.apps.CoreConfig',
     'users.apps.UsersConfig',
@@ -280,4 +281,14 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
    'AUTH_HEADER_TYPES': ('Bearer',),
+}
+
+SWAGGER_SETTINGS = {
+   'SECURITY_DEFINITIONS': {
+      'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+      }
+   }
 }
