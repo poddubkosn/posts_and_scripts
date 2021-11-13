@@ -52,23 +52,23 @@ class FollowSerializer(serializers.ModelSerializer):
         slug_field='username', read_only=True,
         default=serializers.CurrentUserDefault()
     )
-    following = serializers.SlugRelatedField(
+    author = serializers.SlugRelatedField(
 
         slug_field='username', queryset=User.objects.all())
 
     class Meta:
         model = Follow
-        fields = ('user', 'following')
+        fields = ('user', 'author')
 
         validators = (
             UniqueTogetherValidator(
                 queryset=Follow.objects.all(),
-                fields=('user', 'following')
+                fields=('user', 'author')
             ),
         )
 
     def create(self, validated_data):
-        if validated_data.get('user') == validated_data.get('following'):
+        if validated_data.get('user') == validated_data.get('author'):
             raise serializers.ValidationError(
                   'Нельзя подписаться на самого себя!')
         return Follow.objects.create(**validated_data)
