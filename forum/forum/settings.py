@@ -269,6 +269,24 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 5,
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.UserRateThrottle',
+        # 'rest_framework.throttling.AnonRateThrottle',
+        # Не будем подключать класс AnonRateThrottle глобально.
+        # Подключим его только в тех view-классах или вьюсетах,
+        # где надо установить лимиты для анонимов
+        'rest_framework.throttling.ScopedRateThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        # Но сами лимиты установим, и они будут доступны из всего кода проекта
+        'user': '1000/day',  # Лимит для UserRateThrottle
+        'anon': '100/day',  # Лимит для AnonRateThrottle
+        # Имена (ключи) для scope придумывает разработчик, 
+        # в меру собственной фантазии
+        'low_request': '2/minute',
+    },
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated', 
     ],

@@ -9,18 +9,23 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import filters
 from django.views.generic.base import TemplateView
+from rest_framework.throttling import AnonRateThrottle
 
 
 class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = (OwnerOrReadOnly, )
+    #throttle_classes = (AnonRateThrottle,)  # Подключили класс AnonRateThrottle
+    throttle_scope = 'low_request'
 
 
 class PostViewSet(viewsets.ModelViewSet):
     permission_classes = (OwnerOrReadOnly, )
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    #throttle_classes = (AnonRateThrottle,)  # Подключили класс AnonRateThrottle
+    throttle_scope = 'low_request'
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -30,11 +35,15 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (OwnerOrReadOnly, )
+    #throttle_classes = (AnonRateThrottle,)  # Подключили класс AnonRateThrottle
+    throttle_scope = 'low_request'
 
 
 class CommentViewSet(viewsets.ModelViewSet):
     permission_classes = (OwnerOrReadOnly, )
     serializer_class = CommentSerializer
+    #throttle_classes = (AnonRateThrottle,)  # Подключили класс AnonRateThrottle
+    throttle_scope = 'low_request'
 
     def get_queryset(self):
         post_id = self.kwargs.get('post_id')
@@ -55,6 +64,7 @@ class FollowViewSet(mixins.CreateModelMixin,
     serializer_class = FollowSerializer
     filter_backends = (filters.SearchFilter, )
     search_fields = ('author__username',)
+    throttle_scope = 'low_request'
 
     def get_queryset(self):
         user = self.request.user
