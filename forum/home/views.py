@@ -27,12 +27,11 @@ def index(request, author_comment=None):
     sort_author_comments_list = reversed(sorted(author_comments,
                                          key=itemgetter(1)))
     group_list = Group.objects.all()
-    rev_post_list = (post_list[:15])
-    # rev_post_list = list(reversed(rev_post_list[:15]))
+    last_post_list = (post_list[:15])
     paginator = Paginator(post_list, number_of_elements_in_page)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    context = {'page_obj': page_obj, 'post_list': rev_post_list,
+    context = {'page_obj': page_obj, 'post_list': last_post_list,
                'group_list': group_list, 'sort_user_list': sort_user_list,
                'sort_author_comments_list': sort_author_comments_list}
     if author_comment:
@@ -58,8 +57,7 @@ def group_posts(request, slug):
              User.objects.all() if user.posts.count() > 0]
     sort_user_list = reversed(sorted(users, key=itemgetter(1)))
     group_list = Group.objects.all()
-    rev_post_list = list(reversed(post_list_all))
-    rev_post_list = list(reversed(rev_post_list[:15]))
+    last_post_list = (post_list_all[:15])
     paginator = Paginator(posts, number_of_elements_in_page)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -67,7 +65,7 @@ def group_posts(request, slug):
         'group': group, 'sort_user_list': sort_user_list,
         'page_obj': page_obj, 'group_list': group_list,
         'sort_author_comments_list': sort_author_comments_list,
-        'post_list': rev_post_list
+        'post_list': last_post_list
     }
     return render(request, 'home/group_list.html', context)
 
@@ -82,15 +80,14 @@ def profile(request, username):
              User.objects.all() if user.posts.count() > 0]
     sort_user_list = reversed(sorted(users, key=itemgetter(1)))
     group_list = Group.objects.all()
-    rev_post_list = list(reversed(post_list))
-    rev_post_list = list(reversed(rev_post_list[:15]))
+    last_post_list = (post_list[:15])
     posts_count = post_list.count()
     paginator = Paginator(post_list, number_of_elements_in_page)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {'author': author, 'page_obj': page_obj,
                'posts_count': posts_count, 'following': following,
-               'post_list': rev_post_list, 'group_list': group_list,
+               'post_list': last_post_list, 'group_list': group_list,
                'sort_user_list': sort_user_list}
     return render(request, 'home/profile.html', context)
 
@@ -187,8 +184,7 @@ def follow_index(request):
              User.objects.all() if user.posts.count() > 0]
     sort_user_list = reversed(sorted(users, key=itemgetter(1)))
     group_list = Group.objects.all()
-    rev_post_list = list(reversed(post_list))
-    rev_post_list = list(reversed(rev_post_list[:15]))
+    last_post_list = (post_list[:15])
     author_comments = [(user, user.comments.count()) for user in
                        User.objects.all() if user.comments.count() > 0]
     sort_author_comments_list = reversed(sorted(author_comments,
@@ -196,7 +192,7 @@ def follow_index(request):
     paginator = Paginator(post_list, number_of_elements_in_page)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    context = {'page_obj': page_obj, 'post_list': rev_post_list,
+    context = {'page_obj': page_obj, 'post_list': last_post_list,
                'group_list': group_list, 'sort_user_list': sort_user_list,
                'sort_author_comments_list': sort_author_comments_list}
     return render(request, 'home/follow.html', context)
